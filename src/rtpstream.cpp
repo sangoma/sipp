@@ -886,8 +886,10 @@ int rtpstream_get_videoport (rtpstream_callinfo_t *callinfo)
 }
 
 /* code checked */
-void rtpstream_set_remote (rtpstream_callinfo_t *callinfo, int ip_ver, char *ip_addr, int audio_port, int video_port)
+void rtpstream_set_remote (rtpstream_callinfo_t *callinfo, int ip_ver, char *ip_addr,
+                           int audio_port, int image_port, int video_port)
 {
+  // TODO: we don't do anything with image_port right now..
   struct sockaddr_storage   address;
   struct in_addr            *ip4_addr;
   struct in6_addr           *ip6_addr;
@@ -895,7 +897,8 @@ void rtpstream_set_remote (rtpstream_callinfo_t *callinfo, int ip_ver, char *ip_
   unsigned                  count;
   int                       nonzero_ip;
 
-  debugprint ("rtpstream_set_remote callinfo=%p, ip_ver %d ip_addr %s audio %d video %d\n",callinfo,ip_ver,ip_addr,audio_port,video_port);
+  debugprint("rtpstream_set_remote callinfo=%p, ip_ver %d ip_addr %s audio %d image %d video %d\n",
+             callinfo, ip_ver, ip_addr, audio_port, image_port, video_port);
 
   taskinfo= callinfo->taskinfo;
   if (!taskinfo) {
